@@ -1,34 +1,35 @@
-// Var
-var plus, minus, count;
-var input = 0;
-var num; 
+/*----- constants -----*/
+/*----- app's state (variables) -----*/
+var count;
 
+/*----- cached element references -----*/
+var displayEl = document.querySelector('h1');
+var inputEl = document.querySelector('input');
 
-//cached elements
-var plus = document.getElementById('plus');
-var minus = document.getElementById('minus')
-var input = document.getElementsByName('input')
+/*----- event listeners -----*/
+document.getElementById('plus-btn').addEventListener('click', increment);
+document.getElementById('minus-btn').addEventListener('click', decrement);
 
+/*----- functions -----*/
+initialize();
 
-//event listeners
-plus.addEventListener('click', plus);
-minus.addEventListener('click', minus);
-
-num = input.innerHTML="";
-
-
-
-
-
-//functions
-function plus() {
-    return input += num;
+function increment() {
+  count += parseInt(inputEl.value);
+  render();
 }
-function minus() {
-    return input -= num;
-};
 
+function decrement() {
+  count -= parseInt(inputEl.value);
+  render();
+}
 
+function initialize() {
+  count = 0;
+  inputEl.value = 1;
+  render();
+}
 
-
-
+function render() {
+  displayEl.textContent = count;
+  displayEl.className = count < 0 ? 'red' : '';
+}
